@@ -17,7 +17,7 @@ let idCounter = 0;
 let currDate = '';
 if (localStorage.getItem('todos')) {
     getName();
-    displayMessages(todoList);
+    displayMessages(todoList, 'init');
 }
 // to add my tasks
 addButton.addEventListener('click', function() {
@@ -32,7 +32,7 @@ addButton.addEventListener('click', function() {
         date: dateInStr,
     }
     todoList.push(newTodo);
-    displayMessages(todoList);
+    displayMessages(todoList, 'add');
     setName();
     addMessage.value = '';
     countDiv.innerHTML = todoList.length;
@@ -40,14 +40,14 @@ addButton.addEventListener('click', function() {
 
 });
 
-function displayMessages(items) {
+function displayMessages(items, action) {
     let displayMessage = '';
     if (items.length === 0) todo.innerHTML = '';
     items.forEach((item) => {
         displayMessage += `
-        <li class="todo_item" data-item=${item.id}>
+        <li class="${action === 'add' ? 'todo_item--animated' : 'todo_item'}" data-item=${item.id}>
             <div class='todo_container'>
-                <input type='checkbox'id='item_${item.id}' ${item.checked ? 'checked' : ''}>
+                <input type='checkbox' id='item_${item.id}' ${item.checked ? 'checked' : ''}>
                 <label for='item_${item.id}' class="${item.important ? 'important' : ''}">${item.todo}</label>               
                 <button class='delete_icon' data-id=${item.id}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="27" viewBox="0 0 24 27" width="24"><path d="M18.6 25.1H5.39999C4.19999 25.1 3.10001 24.0958 3.10001 22.7904V4.11255H20.8V22.7904C20.8 24.0958 19.8 25.1 18.6 25.1Z" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M1.3 4.21295H22.7" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M15.8 4.21295H8.2V3.61044C8.2 2.20458 9.3 1.09998 10.7 1.09998H13.2C14.6 1.09998 15.7 2.20458 15.7 3.61044V4.21295H15.8Z" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M8.2 7.92841V21.2841" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M12 7.92841V21.2841" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M15.8 7.92841V21.2841" stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>                
@@ -59,7 +59,7 @@ function displayMessages(items) {
         todo.innerHTML = displayMessage;
     });
 }
-setTimeout(displayMessages, 1000)
+setTimeout(displayMessages, 1000);
 
 function setName() {
     let arrStr = JSON.stringify(todoList);
@@ -95,7 +95,7 @@ addMessage.addEventListener('keypress', function(event) {
                 id: idCounter++,
             }
             todoList.push(newTodo);
-            displayMessages(todoList);
+            displayMessages(todoList, 'add');
             setName();
             addMessage.value = '';
             countDiv.innerHTML = todoList.length;
@@ -104,24 +104,24 @@ addMessage.addEventListener('keypress', function(event) {
     // to filter completed tasks
 completedTasks.addEventListener('click', function() {
     let completedTasks = todoList.filter(item => item.checked);
-    displayMessages(completedTasks);
+    displayMessages(completedTasks, 'filter');
 })
 
 // to display all tasks
 allTasks.addEventListener('click', function() {
-    displayMessages(todoList);
+    displayMessages(todoList, 'init');
 })
 
 // to search for a task
 searchTask.addEventListener('input', function(e) {
     let searchedTask = todoList.filter(item => item.todo.toUpperCase().startsWith(e.target.value.toUpperCase()));
-    displayMessages(searchedTask);
+    displayMessages(searchedTask, 'filter');
 })
 
 // to delete the last task
 deleteLast.addEventListener('click', function(event) {
         todoList.pop();
-        displayMessages(todoList);
+        displayMessages(todoList, 'filter');
         setName();
         countDiv.innerHTML = todoList.length;
         countCompleted.innerHTML = completedCounter;
@@ -129,7 +129,7 @@ deleteLast.addEventListener('click', function(event) {
     // to delete all tasks
 deleteAll.addEventListener('click', function(event) {
         todoList.splice(0, todoList.length);
-        displayMessages(todoList);
+        displayMessages(todoList, 'filter');
         setName();
         countDiv.innerHTML = todoList.length;
         completedCounter = 0;
@@ -142,7 +142,7 @@ todo.addEventListener('click', function(e) {
         console.log(e.target.dataset.id);
         let removedObject = todoList.find(item => item.id == e.target.dataset.id);
         todoList = todoList.filter(item => item.id != e.target.dataset.id);
-        displayMessages(todoList);
+        displayMessages(todoList, 'filter');
         setName();
         countDiv.innerHTML = todoList.length;
         if (removedObject.checked) {

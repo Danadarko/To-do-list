@@ -1,19 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 * {
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-.wrapper {
-    height: 100vh;
-}
-
 .container {
     margin: 0 auto;
-    padding: 50px 0;
+    padding: 30px 0;
     background: radial-gradient(ellipse farthest-corner at center top, #f39264 0%, #f2606f 100%);
+    height: 100vh;
 }
 
 .content {
@@ -78,23 +77,22 @@
 
 h1 {
     position: absolute;
+    letter-spacing: 9px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: "Font Awesome 5 Free";
     text-transform: uppercase;
-    font-size: 2.8rem;
+    font-size: 50px;
     z-index: 2;
-    font-weight: 700;
     color: #fff3f3;
-    max-width: 450px;
+    max-width: 500px;
     width: 100%;
     text-align: center;
 }
 
-@media(max-width:440px) {
+@media(max-width:768px) {
     h1 {
-        font-size: 1.8rem;
+        font-size: 40px;
     }
 }
 
@@ -110,7 +108,6 @@ h1 {
 .create_new_todo {
     display: flex;
     margin-bottom: 15px;
-    border-bottom: 1px solid #8e979c;
 }
 
 .add_task {
@@ -127,6 +124,7 @@ input[type=text] {
     background: transparent;
     outline: none;
     transition: all 0.5s;
+    border-bottom: 1px solid #8e979c;
 }
 
 input[type=text]::placeholder {
@@ -147,6 +145,8 @@ input[type=text]:hover {
     border: none;
     background-color: #7a5353;
     transition: all 0.5s;
+    margin-top: 4px;
+    letter-spacing: 3px;
 }
 
 .add:hover {
@@ -254,7 +254,7 @@ li button:hover {
     overflow: auto;
     scroll-behavior: smooth;
     scrollbar-width: 24px;
-    height: 50vh;
+    height: 52vh;
 }
 
 .wrapper_todo::-webkit-scrollbar {
@@ -285,12 +285,12 @@ li button:hover {
 }
 
 .todo li {
-    padding: 10px 0 20px;
+    padding: 10px 0 23px;
     list-style-type: none;
     position: relative;
 }
 
-.todo li:last-child {
+.todo_item--animated:last-child {
     opacity: 0;
     animation: ani 2.5s forwards;
 }
@@ -395,6 +395,10 @@ input[type=checkbox]:checked+label {
     display: flex;
 }
 
+.search-btn {
+    margin-top: 3px;
+}
+
 .search_input {
     width: 100%;
     padding: 10px;
@@ -404,6 +408,7 @@ input[type=checkbox]:checked+label {
     border-bottom: 1px solid #8e979c;
     color: #6C717B;
     font-size: 16px;
+    letter-spacing: 0.5px;
     transition: all, .5s;
 }
 
