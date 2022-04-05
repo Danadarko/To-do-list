@@ -337,6 +337,7 @@ input[type=checkbox]+label:before {
     padding: 2px;
     margin-right: 10px;
     text-align: center;
+    margin-top: 7px;
 }
 
 input[type=checkbox]:checked+label:before {
@@ -350,7 +351,7 @@ input[type=checkbox]:checked+label:before {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     border-radius: 0;
-    margin: 0 15px 5px 5px;
+    margin: 7px 15px 5px 5px;
     transition: all .2s;
 }
 
